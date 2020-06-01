@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
 import rootPath from 'app-root-path';
-import { generateKey, encrypt } from './crypto';
+import { generateKey, encrypt } from '../lib/crypto';
 import generateRandomString from './stringGenerator';
 
 function createFile() {

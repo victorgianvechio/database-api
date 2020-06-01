@@ -1,4 +1,4 @@
-import './dotenv';
+import '../lib/dotenv';
 import jwt from 'jsonwebtoken';
 import chalk from 'chalk';
 import authConfig from '../config/auth';
