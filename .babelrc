@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "esmodules": true
+        }
+      }
+    ]
+  ],
+  "comments": false,
+  "ignore": [
+    "src/utils",
+    "src/test"
+  ]
+}
