@@ -7,7 +7,7 @@ import validation from './validation';
 const routes = new Router();
 
 routes.get('/', (req, res) => {
-  return res.status(200).json({ message: 'Backend api is running' });
+  return res.status(200).json({ message: 'Database API is running' });
 });
 
 routes.use(authMiddleware);
@@ -15,7 +15,7 @@ routes.use(authMiddleware);
 routes.get('/crud', (req, res) => {
   return res
     .status(200)
-    .json({ message: 'Backend api is running and token is valid' });
+    .json({ message: 'Database API is running and token is valid' });
 });
 routes.post('/crud', validation, Controller.index);
 
