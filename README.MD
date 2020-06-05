@@ -20,3 +20,13 @@ Sempre que o AUTH_SECRET for trocado deve gerar um novo token e alterar no .env 
 
 
 yarn build - gera o build convertido para es5 utilizado pelo servidor
+
+
+## Servidor - IIS
+
+instalar IIS Node
+instalar nvm
+nvm install v12.16.3
+nvm use 12.16.3
+
+ir na pasta do NVM na versão do node e dar permissão para o IIS acessar.

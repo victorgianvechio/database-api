@@ -10,6 +10,7 @@ routes.get('/', (req, res) => {
   return res.status(200).json({ message: 'Database API is running' });
 });
 
+// ROTAS QUE NECESSITAM DE AUTENTICAÇÃO
 routes.use(authMiddleware);
 
 routes.get('/crud', (req, res) => {
