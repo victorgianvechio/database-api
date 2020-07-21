@@ -10,6 +10,7 @@ class App {
   constructor() {
     this.nodeEnv = process.env.NODE_ENV;
     this.subDirectory = process.env.SUBDIRECTORY;
+    this.apiVersion = process.env.CURRENT_API_VERSION;
 
     this.server = express();
     this.middlewares();
@@ -30,8 +31,8 @@ class App {
   }
 
   routes() {
-    this.server.use(`${this.subDirectory}/api/v1`, apiRoutesV1);
-    // this.server.use(`${this.subDirectory}/api/v2`, apiRoutesV2);
+    this.server.use(`${this.subDirectory}/${this.apiVersion}`, apiRoutesV1);
+    // this.server.use(`${this.subDirectory}/v2`, apiRoutesV2);
   }
 }
 
