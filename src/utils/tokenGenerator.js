@@ -10,7 +10,8 @@ function generateToken() {
     /* expiresIn: authConfig.expiresIn, */
   });
 
-  console.log(chalk.hex('#fffa65').bold(`\n${token}\n`));
+  // console.log(chalk.hex('#fffa65').bold(`\n${token}\n`));
+  console.log(chalk.hex('#8BE9FD').bold(`\n${token}\n`));
 }
 
 generateToken();
