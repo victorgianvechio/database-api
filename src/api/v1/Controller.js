@@ -18,6 +18,24 @@ class Controller {
     // Sucesso
     return res.status(200).json(data);
   }
+
+  async exec(req, res) {
+    const { query, params = undefined } = req.body;
+    const data = await db.exec(query, params);
+
+    if (data.error) return res.status(400).json(data);
+
+    return res.status(200).json(data);
+  }
+
+  async execMany(req, res) {
+    const { query, params } = req.body;
+    const data = await db.execMany(query, params);
+
+    if (data.error) return res.status(400).json(data);
+
+    return res.status(200).json(data);
+  }
 }
 
 export default new Controller();

@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 
-import '../src/lib/dotenv';
-import db from '../src/database/OracleConnection';
+import '../lib/dotenv';
+import db from '../database/OracleConnection';
 
 async function testConnection() {
   const { err } = await db.testConnection();

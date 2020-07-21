@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import '../src/lib/dotenv';
-import db from '../src/database/OracleConnection';
+import '../lib/dotenv';
+import db from '../database/OracleConnection';
 
 async function querySemProxId() {
   const query =

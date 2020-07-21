@@ -1,5 +1,39 @@
 import Joi from 'joi';
 
+export const execValidation = (req, res, next) => {
+  const { error } = Joi.validate(
+    req.body,
+    Joi.object().keys({
+      query: Joi.string().required(),
+      params: Joi.array(),
+      fromId: Joi.string(),
+      from: Joi.object(),
+      fileName: Joi.string(),
+    })
+  );
+
+  if (error) return res.status(400).json(error.details);
+
+  return next();
+};
+
+export const execManyValidation = (req, res, next) => {
+  const { error } = Joi.validate(
+    req.body,
+    Joi.object().keys({
+      query: Joi.string().required(),
+      params: Joi.array().required(),
+      fromId: Joi.string(),
+      from: Joi.object(),
+      fileName: Joi.string(),
+    })
+  );
+
+  if (error) return res.status(400).json(error);
+
+  return next();
+};
+
 export default (req, res, next) => {
   const { many } = req.body;
 

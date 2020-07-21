@@ -1,8 +1,8 @@
 import fs from 'fs';
 import chalk from 'chalk';
 
-import '../src/lib/dotenv';
-import db from '../src/database/OracleConnection';
+import '../lib/dotenv';
+import db from '../database/OracleConnection';
 
 (async () => {
   const alunos = await db.exec(

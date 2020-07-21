@@ -58,6 +58,7 @@ class Connection {
       }
 
       conn = await oracledb.getConnection(config);
+
       const result =
         typeof params !== 'undefined'
           ? await conn.execute(query, params)
@@ -110,7 +111,8 @@ class Connection {
       // Verifica se a query é um insert
       if (query.indexOf('INSERT INTO') === -1)
         throw {
-          message: '"many" parameter allowed only for insert statement',
+          message:
+            '"many" parameter allowed only for insert statement | "execMany" function only allowed for insert statement',
         };
 
       // Busca nome da tabela na query
