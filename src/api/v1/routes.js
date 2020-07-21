@@ -13,10 +13,11 @@ routes.get('/', (req, res) => {
 // ------------------ ROTAS QUE NECESSITAM DE AUTENTICAÇÃO ------------------ //
 routes.use(authMiddleware);
 
-routes.get('/crud', (req, res) => {
-  return res
-    .status(200)
-    .json({ message: 'Database API is running and token is valid' });
+routes.get('/isAuth', (req, res) => {
+  return res.status(200).json({
+    auth: true,
+    message: 'Database API is running and token is valid',
+  });
 });
 
 routes.post('/crud', validation, Controller.index);
