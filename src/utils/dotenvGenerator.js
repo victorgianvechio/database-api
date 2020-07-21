@@ -28,7 +28,7 @@ function createFile() {
     stream.write('\n');
     stream.write(`NODE_ENV="development"`);
     stream.write('\n');
-    stream.write(`CURRENT_API_VERSION="v1"`);
+    stream.write(`CURRENT_API_VERSION="/v1"`);
     stream.write('\n\n');
 
     // AUTH
@@ -66,7 +66,7 @@ function createFile() {
     // Config
     stream.write('# Config');
     stream.write('\n\n');
-    stream.write('SUBDIRECTORY="/sistemas/apidocente"');
+    stream.write('SUBDIRECTORY="/sistemas/database-api"');
 
     stream.end();
 

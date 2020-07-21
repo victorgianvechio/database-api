@@ -6,7 +6,7 @@ yarn 1.19.0
 
 ## Comandos
 
-Se não tiver yarn instalado, uitilizar npm run
+Se não tiver **yarn** instalado, uitilizar **npm run**
 
 **yarn env [user pass]** - gera arquivo .env com usuário e senha do banco criptografados
 

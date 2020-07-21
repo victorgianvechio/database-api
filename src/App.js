@@ -31,7 +31,7 @@ class App {
   }
 
   routes() {
-    this.server.use(`${this.subDirectory}/${this.apiVersion}`, apiRoutesV1);
+    this.server.use(`${this.subDirectory}${this.apiVersion}`, apiRoutesV1);
     // this.server.use(`${this.subDirectory}/v2`, apiRoutesV2);
   }
 }
