@@ -5,13 +5,18 @@ import authConfig from '../config/auth';
 
 function generateToken() {
   const value = new Date();
+  let token = '';
 
-  const token = jwt.sign({ value }, authConfig.secret, {
-    /* expiresIn: authConfig.expiresIn, */
-  });
+  if (process.argv[2] !== undefined) {
+    const expiresIn = String(process.argv[2]);
+    token = jwt.sign({ value }, authConfig.secret, {
+      expiresIn,
+    });
+  } else {
+    token = jwt.sign({ value }, authConfig.secret, {});
+  }
 
-  // console.log(chalk.hex('#fffa65').bold(`\n${token}\n`));
-  console.log(chalk.hex('#8BE9FD').bold(`\n${token}\n`));
+  console.log(chalk.hex('#fffa65').bold(`\n${token}\n`));
 }
 
 generateToken();

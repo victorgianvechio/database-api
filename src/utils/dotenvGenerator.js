@@ -27,8 +27,6 @@ function createFile() {
     stream.write(`APP_PORT=8080`);
     stream.write('\n');
     stream.write(`NODE_ENV="development"`);
-    stream.write('\n');
-    stream.write(`CURRENT_API_VERSION="/v1"`);
     stream.write('\n\n');
 
     // AUTH

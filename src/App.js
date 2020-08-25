@@ -1,4 +1,5 @@
 import express from 'express';
+
 import morgan from 'morgan';
 
 import allowCors from './middlewares/cors';
@@ -10,7 +11,6 @@ class App {
   constructor() {
     this.nodeEnv = process.env.NODE_ENV;
     this.subDirectory = process.env.SUBDIRECTORY;
-    this.apiVersion = process.env.CURRENT_API_VERSION;
 
     this.server = express();
     this.middlewares();
@@ -31,7 +31,7 @@ class App {
   }
 
   routes() {
-    this.server.use(`${this.subDirectory}${this.apiVersion}`, apiRoutesV1);
+    this.server.use(`${this.subDirectory}/v1`, apiRoutesV1);
     // this.server.use(`${this.subDirectory}/v2`, apiRoutesV2);
   }
 }

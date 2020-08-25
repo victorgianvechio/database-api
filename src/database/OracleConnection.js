@@ -35,11 +35,23 @@ class Connection {
     try {
       query = query.toUpperCase();
 
-      // Verifica se a query é um delete sem where
-      if (query.indexOf('DELETE') !== -1 && query.indexOf('WHERE') === -1)
+      // Verifica se a query não é uma DML
+      if (
+        query.indexOf('DROP TABLE') !== -1 ||
+        query.indexOf('ALTER TABLE') !== -1 ||
+        query.indexOf('CREATE TABLE') !== -1
+      ) {
         throw {
-          message: '"delete" is not allowed without where statement',
+          message: 'query must be an insert, update or delete statement',
         };
+      }
+
+      // Verifica se a query é um delete sem where
+      if (query.indexOf('DELETE') !== -1 && query.indexOf('WHERE') === -1) {
+        throw {
+          message: '"delete" is not allowed without "where" statement',
+        };
+      }
 
       // Verifica se a query é um insert
       if (query.indexOf('INSERT INTO') !== -1) {
