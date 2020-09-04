@@ -8,21 +8,25 @@ yarn 1.19.0
 
 Se não tiver **yarn** instalado, uitilizar **npm run**
 
-**yarn env [user pass]** - gera arquivo .env com usuário e senha do banco criptografados
+### Env
 
-**npm run env [user pass]**
+gera arquivo .env com usuário e senha do banco criptografados
 
-obs: também gera uma **APP_SECRET** de 128 bytes
+obs: também gera uma **APP_SECRET** de 128 bytes que é utilizado para descriptografar o token. Sempre que o **APP_SECRET** for trocado deve gerar um novo token
 
-**yarn token** - gera o token de autenticação na API que deve ser informado no **.env** do **middleware**
+**yarn env [user pass]**
 
-**npm run token**
+### Token
 
-Sempre que o **APP_SECRET** for trocado deve gerar um novo token e alterar no **.env** do **middleware**
+gera o Bearer Token que deve ser passado no header das requisições feitas para a API
 
+**yarn token**
 
-**yarn build** - gera o build convertido para es5 utilizado pelo servidor
+### Build
 
+gera o build convertido para es5 utilizado pelo servidor
+
+**yarn build**
 
 ## Servidor - IIS
 

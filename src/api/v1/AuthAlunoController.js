@@ -37,6 +37,7 @@ class AlunoController {
     if (data[0]) {
       return res.status(200).json(data[0]);
     }
+    // 204 No Content
     return res.status(200).json({
       message: 'Aluno não encontrado ou não matrículado no período vigente',
     });
