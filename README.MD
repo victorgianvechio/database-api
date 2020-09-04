@@ -1,8 +1,8 @@
 # Database API
 
-node 12.16.1
-npm 6.13.4
-yarn 1.19.0
+-   node 12.16.1
+-   npm 6.13.4
+-   yarn 1.19.0
 
 ## Comandos
 
@@ -29,6 +29,8 @@ gera o build convertido para es5 utilizado pelo servidor
 **yarn build**
 
 ## Servidor - IIS
+
+Necessário instalar o IIS Node e também o NVM (Node Version Manager)
 
 ### instalar IIS Node
 -   instalar nvm
