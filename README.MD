@@ -30,11 +30,11 @@ gera o build convertido para es5 utilizado pelo servidor
 
 ## Servidor - IIS
 
-Necessário instalar o IIS Node e também o NVM (Node Version Manager)
+Necessário instalar o **IIS Node** e também o **NVM** (Node Version Manager)
 
-### instalar IIS Node
--   instalar nvm
--   nvm install v12.16.3
--   nvm use 12.16.3
+### Commandos NVM
+-   nvm list - lista as versões do node instaladas
+-   nvm install v12.16.3 - instala a versão do node utilizada na API
+-   nvm use 12.16.3 - seta a versão a ser utilizada
 
 **ir na pasta do NVM na versão do node e dar permissão para o IIS acessar.**
