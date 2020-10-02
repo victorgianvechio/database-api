@@ -1,4 +1,4 @@
-import db from '../../database/OracleConnection';
+import db from '../../../database/OracleConnection';
 
 class Controller {
   async index(req, res) {

@@ -61,6 +61,18 @@ function createFile() {
     stream.write(`CRYPTO_KEY="${secretKey}"`);
     stream.write('\n\n');
 
+    // Mail
+    stream.write(`# Mail`);
+    stream.write('\n\n');
+    stream.write(`MAIL_HOST="smtp.gmail.com"`);
+    stream.write('\n');
+    stream.write(`MAIL_PORT=${587}`);
+    stream.write('\n');
+    stream.write(`MAIL_USER="desenvolvimento@univem.edu.br"`);
+    stream.write('\n');
+    stream.write(`MAIL_PASS="Ani0911@"`);
+    stream.write('\n\n');
+
     // Config
     stream.write('# Config');
     stream.write('\n\n');
