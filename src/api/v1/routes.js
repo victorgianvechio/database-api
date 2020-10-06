@@ -20,11 +20,12 @@ const routes = new Router();
 // ------------------------------- ROTAS LIVRE ------------------------------ //
 // -------------------------------------------------------------------------- //
 
+// --------------------------------- DEFAULT ---------------------------------//
 routes.get('/', (req, res) => {
   return res.status(200).json({ message: 'Database API is running' });
 });
 
-// -------------------------- EU CONTABILISTA --------------------------------//
+// ----------------------------- DRIVE-IN EVENTOS ----------------------------//
 routes.post('/drivein/qrcode', driveinValidation, DriveinController.index);
 
 // -------------------------------------------------------------------------- //
@@ -33,7 +34,8 @@ routes.post('/drivein/qrcode', driveinValidation, DriveinController.index);
 
 routes.use(authMiddleware);
 
-routes.get('/authToken', (req, res) => {
+// ---------------------------- DEFAULT COM TOKEN ----------------------------//
+routes.get('/auth', (req, res) => {
   return res.status(200).json({
     auth: true,
     message: 'Database API is running and token is valid',

@@ -1,7 +1,6 @@
 /* eslint-disable no-async-promise-executor */
 /* eslint-disable import/prefer-default-export */
 
-// import fs from 'fs';
 import path from 'path';
 
 import QRCode from '../../../app/QRCode/QRCodeService';
@@ -14,12 +13,9 @@ export async function sendEmail(event, participant) {
       const fileName = `${event.board}-${participant.id}`;
 
       // GERA QRCODE
-      console.log('qrcode', participant.name);
       await QRCode.generate(participant.url, fileName);
-      console.log('finalizou qrcode', participant.name);
 
       // ENVIA E-MAIL
-      console.log('email', participant.name);
       await Mail.sendMail({
         to: `${participant.name} <${participant.email}>`,
         subject: `Inscrição Evento - "${event.event_name}"`,
@@ -30,7 +26,7 @@ export async function sendEmail(event, participant) {
             cid: 'qrcode',
           },
         ],
-        template: 'default-body',
+        template: 'body',
         context: {
           name: participant.name,
           board: event.board,
@@ -39,6 +35,7 @@ export async function sendEmail(event, participant) {
           event_name: event.event_name,
         },
       });
+      console.log(`E-mail enviado: ${participant.email} - ${event.event_name}`);
 
       // DEVOLVE O RESULTADO DA PROMISE
       resolve({
@@ -47,10 +44,9 @@ export async function sendEmail(event, participant) {
         cpf: participant.cpf,
         fileName,
       });
-      console.log('finalizou', participant.name);
     } catch (err) {
       err.status = false;
-      console.log(err);
+      console.error(err);
       reject(err);
     }
   });

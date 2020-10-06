@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-await-in-loop */
@@ -13,25 +14,24 @@ class EventosController {
 
     const promises = [];
 
-    for (const i in data.participants) {
-      console.log('\n');
-      console.log('participante', i);
-      promises.push(await sendEmail(data, data.participants[i]));
-      console.log('fim participante', i);
-      console.log('\n');
-    }
+    try {
+      // ADICIONA AS PROMISES NO ARRAY
+      for (const i in data.participants) {
+        promises.push(await sendEmail(data, data.participants[i]));
+      }
 
-    await Promise.all(promises).then(result => {
-      // REMOVE ARQUIVO
-      result.forEach(participant => {
-        console.log('removendo arquivo', participant.name);
-        unlinkSync(resolve('temp', `${participant.fileName}.png`));
-        console.log('arquivo removido', participant.name);
+      // EXECUTA AS PROMISES
+      await Promise.all(promises).then(result => {
+        // REMOVE ARQUIVO
+        result.forEach(participant => {
+          unlinkSync(resolve('temp', `${participant.fileName}.png`));
+        });
+
+        return res.status(200).json({ result });
       });
-
-      console.log('retorno response');
-      return res.status(200).json({ result });
-    });
+    } catch (err) {
+      return res.status(200).json({ err });
+    }
   }
 }
 
