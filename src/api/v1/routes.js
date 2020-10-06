@@ -11,18 +11,28 @@ import validation, {
 import AuthAlunoController from './Talentos/AuthAlunoController';
 import authAlunoValidation from './Talentos/authAlunoValidation';
 
-import EuContabilistaController from './Eventos/EuContabilistaController';
+import DriveinController from './Drivein/DriveinController';
+import driveinValidation from './Drivein/driveinValidation';
 
 const routes = new Router();
 
-// ---------------------- ROTAS LIVRE PARA TESTAR API ----------------------- //
+// -------------------------------------------------------------------------- //
+// ------------------------------- ROTAS LIVRE ------------------------------ //
+// -------------------------------------------------------------------------- //
+
 routes.get('/', (req, res) => {
   return res.status(200).json({ message: 'Database API is running' });
 });
 
+// -------------------------- EU CONTABILISTA --------------------------------//
+routes.post('/drivein/qrcode', driveinValidation, DriveinController.index);
+
+// -------------------------------------------------------------------------- //
+// ------------------ ROTAS QUE NECESSITAM DE AUTENTICAÇÃO ------------------ //
+// -------------------------------------------------------------------------- //
+
 routes.use(authMiddleware);
 
-// ------------------ ROTAS QUE NECESSITAM DE AUTENTICAÇÃO ------------------ //
 routes.get('/authToken', (req, res) => {
   return res.status(200).json({
     auth: true,
@@ -39,8 +49,5 @@ routes.post('/execMany', execManyValidation, DatabaseController.execMany);
 
 // ------------------------------ TALENTOS -----------------------------------//
 routes.post('/auth/alunos', authAlunoValidation, AuthAlunoController.find);
-
-// ------------------------------ EU CONTABILISTA ------------------------------------//
-routes.post('/carros', EuContabilistaController.index);
 
 export default routes;

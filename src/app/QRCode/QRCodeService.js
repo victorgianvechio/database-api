@@ -2,9 +2,9 @@ import qrcode from 'qrcode';
 import { resolve } from 'path';
 
 class QRCode {
-  async generate(value) {
+  async generate(value, filename) {
     qrcode.toFile(
-      resolve('temp', `${value}.png`),
+      resolve('temp', `${filename}.png`),
       value,
       {
         color: {

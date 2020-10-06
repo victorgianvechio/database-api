@@ -18,12 +18,12 @@
   },
   "scripts": {
     "dev": "nodemon src/server.js",
-    "dev:browser": "start http://localhost:8080/sistemas/apidocente/api/v1 & nodemon src/server.js ",
+    "dev:browser": "start http://localhost:8080/sistemas/database-api/v1 & nodemon src/server.js ",
     "dev:debug": "nodemon --inspect src/loader.js",
     "eslint:fix": "eslint --fix src --ext .js",
     "env": "sucrase-node src/utils/dotenvGenerator.js",
     "token": "sucrase-node src/utils/tokenGenerator.js",
-    "build": "babel src -d build",
+    "build": "babel src -d build --copy-files",
     "start": "node build/server.js",
     "test:blob": "sucrase-node src/test/blob.js",
     "test:db": "sucrase-node src/test/db.js"
