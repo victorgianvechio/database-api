@@ -26,7 +26,10 @@
     "build": "babel src -d build --copy-files",
     "start": "node build/server.js",
     "test:blob": "sucrase-node src/test/blob.js",
-    "test:db": "sucrase-node src/test/db.js"
+    "test:db": "sucrase-node src/test/db.js",
+    "test:qrcode": "sucrase-node src/test/qrcode.js",
+    "test:hbs-pdf": "sucrase-node src/test/hbs-pdf.js",
+    "hbs-pdf": "sucrase-node src/app/HbsToPdf/ConversionService.js"
   },
   "engineStrict": true,
   "engines": {
@@ -39,6 +42,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.1.0",
+    "handlebars-pdf": "^1.0.1",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
@@ -46,7 +50,8 @@
     "nodemailer-express-handlebars": "^4.0.0",
     "oracledb": "^4.2.0",
     "qrcode": "^1.4.4",
-    "randomstring": "^1.1.5"
+    "randomstring": "^1.1.5",
+    "uuid-generate": "^1.0.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

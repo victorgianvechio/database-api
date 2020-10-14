@@ -6,6 +6,7 @@ export default (req, res, next) => {
     Joi.object().keys({
       board: Joi.string().required(),
       event_name: Joi.string().required(),
+      event_slug: Joi.string().required(),
       participants: Joi.array().items(
         Joi.object().keys({
           name: Joi.string().required(),

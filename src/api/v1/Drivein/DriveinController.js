@@ -8,6 +8,10 @@ import { unlinkSync } from 'fs';
 
 import { sendEmail } from './driveinService';
 
+import { tempDir } from '../../../utils/publicPaths';
+
+// const tempDir = resolve(__dirname, '..', '..', '..', '..', 'temp');
+
 class EventosController {
   async index(req, res) {
     const data = req.body;
@@ -24,7 +28,7 @@ class EventosController {
       await Promise.all(promises).then(result => {
         // REMOVE ARQUIVO
         result.forEach(participant => {
-          unlinkSync(resolve('temp', `${participant.fileName}.png`));
+          unlinkSync(resolve(tempDir, `${participant.fileName}.png`));
         });
 
         return res.status(200).json({ result });

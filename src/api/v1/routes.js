@@ -14,6 +14,11 @@ import authAlunoValidation from './Talentos/authAlunoValidation';
 import DriveinController from './Drivein/DriveinController';
 import driveinValidation from './Drivein/driveinValidation';
 
+import AcompanhamentoController from './VestibularPresencial/Acompanhamento/AcompanhamentoController';
+import acompanhamentoValidation from './VestibularPresencial/Acompanhamento/acompanhamentoValidation';
+
+import QRCodeController from './QRCode/QRCodeController';
+
 const routes = new Router();
 
 // -------------------------------------------------------------------------- //
@@ -28,6 +33,19 @@ routes.get('/', (req, res) => {
 // ----------------------------- DRIVE-IN EVENTOS ----------------------------//
 routes.post('/drivein/qrcode', driveinValidation, DriveinController.index);
 
+// ---------------------------- GERADOR DE QRCODE ----------------------------//
+// Ex: /qrcode/?value=teste
+routes.get('/qrcode', QRCodeController.index);
+
+// ------------------------ VESTIBULAR PRESENCIAL ----------------------------//
+
+// ACOMPANHAMENTO
+routes.get(
+  '/vestibularpresencial/acompanhamento/:cpf',
+  acompanhamentoValidation,
+  AcompanhamentoController.find
+);
+
 // -------------------------------------------------------------------------- //
 // ------------------ ROTAS QUE NECESSITAM DE AUTENTICAÇÃO ------------------ //
 // -------------------------------------------------------------------------- //
@@ -35,7 +53,7 @@ routes.post('/drivein/qrcode', driveinValidation, DriveinController.index);
 routes.use(authMiddleware);
 
 // ---------------------------- DEFAULT COM TOKEN ----------------------------//
-routes.get('/auth', (req, res) => {
+routes.get('/auth-token', (req, res) => {
   return res.status(200).json({
     auth: true,
     message: 'Database API is running and token is valid',
@@ -47,9 +65,13 @@ routes.post('/crud', validation, DatabaseController.index);
 
 // ------------------------------ DATABASE -----------------------------------//
 routes.post('/exec', execValidation, DatabaseController.exec);
-routes.post('/execMany', execManyValidation, DatabaseController.execMany);
+routes.post('/exec-many', execManyValidation, DatabaseController.execMany);
 
 // ------------------------------ TALENTOS -----------------------------------//
-routes.post('/auth/alunos', authAlunoValidation, AuthAlunoController.find);
+routes.post(
+  '/talentos/auth/alunos',
+  authAlunoValidation,
+  AuthAlunoController.find
+);
 
 export default routes;

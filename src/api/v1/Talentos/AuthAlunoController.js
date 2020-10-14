@@ -5,7 +5,7 @@ class AlunoController {
     const { nro_aluno, senha } = req.body;
 
     const query = `
-        SELECT A.NRO_ALUNO,
+      SELECT DISTINCT A.NRO_ALUNO,
           A.NOME_ALUNO,
           A.E_MAIL,
           A.E_MAIL_INSTITUICAO,
@@ -21,12 +21,10 @@ class AlunoController {
           A.FONE_ALUNO,
           A.NOMEPAI,
           A.NOMEMAE
-        FROM   ALUNO A
-          INNER JOIN MATRICULA M
-                  ON M.NRO_ALUNO = A.NRO_ALUNO
-                      AND M.ANO_SEM_MAT = (SELECT CA.ANO_SEM_MATRICULA
-                                          FROM   CONFIG_ACADEMICO CA)
-        WHERE  A.NRO_ALUNO = :NRO_ALUNO
+      FROM   ALUNO A
+      INNER JOIN MATRICULA_VIGENTE MV
+          ON MV.NRO_ALUNO = A.NRO_ALUNO
+      WHERE  A.NRO_ALUNO = :NRO_ALUNO
           AND A.SENHA = :SENHA
     `;
 

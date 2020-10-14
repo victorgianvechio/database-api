@@ -22,14 +22,14 @@ class Mail {
   }
 
   configureTemplate() {
-    const viewPath = resolve(__dirname, 'partials');
+    const viewPath = resolve(__dirname, 'templates');
 
     this.transporter.use(
       'compile',
       nodemailerhbs({
         viewEngine: exphbs.create({
           layoutsDir: resolve(viewPath, '..', 'layouts'),
-          partialsDir: resolve(viewPath),
+          partialsDir: resolve(viewPath, '..', 'partials'),
           defaultLayout: 'default',
           extname: '.hbs',
         }),
