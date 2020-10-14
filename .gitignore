@@ -8,9 +8,6 @@ logs
 # Environment files
 *.env
 
-# Text files
-*.txt
-
 # Distribution directory
 build
 dist
