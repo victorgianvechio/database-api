@@ -8,6 +8,8 @@ import validation, {
   execManyValidation,
 } from './Database/databaseValidation';
 
+import RepositorioController from './Repositorio/RepositorioController';
+
 import AuthAlunoController from './Talentos/AuthAlunoController';
 import authAlunoValidation from './Talentos/authAlunoValidation';
 
@@ -18,6 +20,7 @@ import AcompanhamentoController from './VestibularPresencial/Acompanhamento/Acom
 import acompanhamentoValidation from './VestibularPresencial/Acompanhamento/acompanhamentoValidation';
 
 import QRCodeController from './QRCode/QRCodeController';
+import qrcodeValidation from './QRCode/qrcodeValidation';
 
 const routes = new Router();
 
@@ -34,14 +37,13 @@ routes.get('/', (req, res) => {
 routes.post('/drivein/qrcode', driveinValidation, DriveinController.index);
 
 // ---------------------------- GERADOR DE QRCODE ----------------------------//
-// Ex: /qrcode/?value=teste
-routes.get('/qrcode', QRCodeController.index);
+routes.post('/qrcode/base64', qrcodeValidation, QRCodeController.base64);
 
 // ------------------------ VESTIBULAR PRESENCIAL ----------------------------//
 
 // ACOMPANHAMENTO
 routes.get(
-  '/vestibularpresencial/acompanhamento/:cpf',
+  '/vestibular-presencial/acompanhamento/:cpf',
   acompanhamentoValidation,
   AcompanhamentoController.find
 );
@@ -59,6 +61,9 @@ routes.get('/auth-token', (req, res) => {
     message: 'Database API is running and token is valid',
   });
 });
+
+// ------------------------------ REPOSITORIO --------------------------------//
+routes.get('/repositorio', RepositorioController.index);
 
 // ---------------------------- APAGAR DEPOIS --------------------------------//
 routes.post('/crud', validation, DatabaseController.index);

@@ -4,16 +4,21 @@ class AcompanhamentoController {
   async find(req, res) {
     const { cpf } = req.params;
 
+    // TIPO_CONVOCACAO
+    // 1 = convocado
+
     const query = `
     SELECT VEST.ID_VESTIBULAR,
-        VEST.DESCRICAO,
+        VEST.DESCRICAO AS DESC_VESTIB,
         VEST.TIPO_EAD,
         V.INSCRICAO,
-        CV.DESCRICAO,
+        V.NOME,
+        V.CPF,
+        CV.DESCRICAO AS DESC_CURSO,
         CV.PERIODO,
         VC.CLASSIFICACAO,
         CASE VC.TIPO_CONVOCACAO
-          WHEN 'Convocado' THEN 1
+          WHEN '1' THEN 1
           ELSE 0
         END AS CONVOCADO,
         CASE
@@ -37,6 +42,7 @@ class AcompanhamentoController {
                   AND M.ANO_SEM_MAT = VEST.ANO_SEM_LETIVO
     WHERE  V.CPF = :CPF
         AND VEST.SITUACAO = 1
+    ORDER BY VEST.ID_VESTIBULAR DESC
     `;
 
     const data = await db.exec(query, [cpf]);

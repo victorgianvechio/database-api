@@ -6,35 +6,34 @@ import QRCode from '../../../app/QRCode/QRCodeService';
 import { tempDir } from '../../../utils/publicPaths';
 
 class QRCodeController {
-  async index(req, res) {
-    const { value } = req.query;
-
+  async base64(req, res) {
+    const fsPromises = fs.promises;
+    const { value } = req.body;
     const fileName = uuid.generate();
 
-    await QRCode.generate(value, fileName);
+    try {
+      // GERA O QRCODE COMO PNG
+      await QRCode.generate(value, fileName);
 
-    const readStream = fs.createReadStream(
-      path.resolve(tempDir, `${fileName}.png`),
-      {
-        highWaterMark: 16,
-      }
-    );
-    const buffer = [];
+      // CARREGAR O ARQUIVO PNG
+      const file = await fsPromises.readFile(
+        path.resolve(tempDir, `${fileName}.png`),
+        {
+          encoding: 'base64',
+        }
+      );
 
-    readStream.on('data', chunk => {
-      buffer.push(chunk);
-    });
+      // CONVERTE A IMAGEM PARA BASE64
+      const base64str = Buffer.from(file).toString('base64');
 
-    readStream.on('end', () => {
-      // Cria a imagem a partir do buffer
-      // Buffer.concat(buffer).toString();
-
-      // REMOVE ARQUIVO
+      // REMOVE O ARQUIVO
       fs.unlinkSync(path.resolve(tempDir, `${fileName}.png`));
 
-      // RETORNA BUFFER DA IMAGEM
-      return res.status(200).json(buffer);
-    });
+      // RETORNA O BASE64 DO ARQUIVO
+      return res.status(200).json({ base64: base64str });
+    } catch (err) {
+      return res.status(500).json(err);
+    }
   }
 }
 

@@ -78,7 +78,6 @@ export default morgan((tokens, req, res) => {
   return `
 ${log.methodStatus} - ${log.timestamp}
 ${log.fullUrl} - ${log.responseTime} / ${log.contentLenght}
-${log.from}
 ${log.body}
 `;
 });
