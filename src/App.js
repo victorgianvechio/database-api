@@ -7,6 +7,8 @@ import logger from './middlewares/logger';
 
 import apiRoutesV1 from './api/v1/routes';
 
+import crons from './crons';
+
 class App {
   constructor() {
     this.nodeEnv = process.env.NODE_ENV;
@@ -15,6 +17,7 @@ class App {
     this.server = express();
     this.middlewares();
     this.routes();
+    crons;
   }
 
   middlewares() {
