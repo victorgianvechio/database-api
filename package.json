@@ -38,11 +38,6 @@
     "node": ">=12.16.1",
     "npm": ">=6.13.4"
   },
-  "jest": {
-    "transform": {
-      ".(js|jsx|ts|tsx)": "@sucrase/jest-plugin"
-    }
-  },
   "dependencies": {
     "app-root-path": "^3.0.0",
     "chalk": "^4.0.0",

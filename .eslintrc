@@ -4,7 +4,17 @@
     "node": true,
     "jest/globals": true
   },
-  "extends": ["airbnb-base", "prettier"],
+  "settings": {
+    "jest": {
+      "version": 26
+    }
+  },
+  "extends": [
+    "airbnb-base",
+    "prettier",
+    "plugin:jest/recommended",
+    "plugin:jest/style"
+  ],
   "plugins": ["prettier", "jest"],
   "globals": {
     "Atomics": "readonly",
