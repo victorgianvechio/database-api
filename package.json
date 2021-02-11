@@ -30,12 +30,18 @@
     "test:qrcode": "sucrase-node src/test/qrcode.js",
     "test:hbs-pdf": "sucrase-node src/test/hbs-pdf.js",
     "hbs-pdf": "sucrase-node src/app/HbsToPdf/ConversionService.js",
-    "test:base64": "sucrase-node src/test/base64.js"
+    "test:base64": "sucrase-node src/test/base64.js",
+    "test": "jest"
   },
   "engineStrict": true,
   "engines": {
     "node": ">=12.16.1",
     "npm": ">=6.13.4"
+  },
+  "jest": {
+    "transform": {
+      ".(js|jsx|ts|tsx)": "@sucrase/jest-plugin"
+    }
   },
   "dependencies": {
     "app-root-path": "^3.0.0",
@@ -59,11 +65,14 @@
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
-    "eslint": "^6.8.0",
+    "@sucrase/jest-plugin": "^2.0.0",
+    "eslint": "^7.19.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jest": "^24.1.3",
     "eslint-plugin-prettier": "^3.1.2",
+    "jest": "^26.6.3",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
     "sucrase": "^3.12.1"

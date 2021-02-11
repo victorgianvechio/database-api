@@ -7,4 +7,3 @@ before_script:
 
 script:
   - yarn test
-  - yarn run test:e2e
