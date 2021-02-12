@@ -73,16 +73,16 @@ function createFile() {
     stream.write(`MAIL_PASS=""`);
     stream.write('\n\n');
 
-    // Config
-    stream.write('# Config');
-    stream.write('\n\n');
-    stream.write('SUBDIRECTORY="/sistemas/database-api"');
-    stream.write('\n\n');
-
     // Sentry
     stream.write('# Sentry');
     stream.write('\n\n');
     stream.write('SENTRY_DSN=""');
+    stream.write('\n\n');
+
+    // Config
+    stream.write('# Config');
+    stream.write('\n\n');
+    stream.write('SUBDIRECTORY="/sistemas/database-api"');
 
     stream.end();
 
