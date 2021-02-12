@@ -40,19 +40,19 @@ function createFile() {
     stream.write('\n\n');
     stream.write(`APP_NAME="Database API"`);
     stream.write('\n');
-    stream.write(`COMPANY="UNIVEM"`);
+    stream.write(`COMPANY=""`);
     stream.write('\n');
-    stream.write(`COMPANY_DESC="Centro Universitário Eurípides de Marília"`);
+    stream.write(`COMPANY_DESC=""`);
     stream.write('\n\n');
 
     // Database
     stream.write(`# Database`);
     stream.write('\n\n');
-    stream.write(`DB_HOST="10.254.0.29"`);
+    stream.write(`DB_HOST=""`);
     stream.write('\n');
     stream.write(`DB_PORT=${1521}`);
     stream.write('\n');
-    stream.write(`DB_NAME="feesr"`);
+    stream.write(`DB_NAME=""`);
     stream.write('\n');
     stream.write(`DB_USER="${user}"`);
     stream.write('\n');
@@ -64,19 +64,25 @@ function createFile() {
     // Mail
     stream.write(`# Mail`);
     stream.write('\n\n');
-    stream.write(`MAIL_HOST="smtp.gmail.com"`);
+    stream.write(`MAIL_HOST=""`);
     stream.write('\n');
-    stream.write(`MAIL_PORT=${587}`);
+    stream.write(`MAIL_PORT=`);
     stream.write('\n');
-    stream.write(`MAIL_USER="desenvolvimento@univem.edu.br"`);
+    stream.write(`MAIL_USER=""`);
     stream.write('\n');
-    stream.write(`MAIL_PASS="Ani0911@"`);
+    stream.write(`MAIL_PASS=""`);
     stream.write('\n\n');
 
     // Config
     stream.write('# Config');
     stream.write('\n\n');
     stream.write('SUBDIRECTORY="/sistemas/database-api"');
+    stream.write('\n\n');
+
+    // Sentry
+    stream.write('# Sentry');
+    stream.write('\n\n');
+    stream.write('SENTRY_DSN=""');
 
     stream.end();
 

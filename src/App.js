@@ -1,9 +1,10 @@
 import express from 'express';
-
 import morgan from 'morgan';
 
+import * as Sentry from '@sentry/node';
+
+import sentryConfig from './config/sentry';
 import allowCors from './middlewares/cors';
-import logger from './middlewares/logger';
 
 import apiRoutesV1 from './api/v1/routes';
 
@@ -13,25 +14,26 @@ class App {
     this.subDirectory = process.env.SUBDIRECTORY;
 
     this.server = express();
+
+    Sentry.init(sentryConfig);
+
     this.middlewares();
     this.routes();
   }
 
   middlewares() {
+    this.server.use(Sentry.Handlers.requestHandler());
     this.server.use(express.json());
     this.server.use(allowCors);
 
-    if (this.nodeEnv === 'development') {
-      this.server.use(logger);
-    } else {
-      this.server.use(
-        morgan(`[:date] - :method [:status] :url - :response-time ms`)
-      );
-    }
+    this.server.use(
+      morgan(`[:date] - :method [:status] :url - :response-time ms`)
+    );
   }
 
   routes() {
     this.server.use(`${this.subDirectory}/v1`, apiRoutesV1);
+    this.server.use(Sentry.Handlers.errorHandler());
     // this.server.use(`${this.subDirectory}/v2`, apiRoutesV2);
   }
 }
