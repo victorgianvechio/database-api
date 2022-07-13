@@ -7,6 +7,7 @@ export default {
     pass: process.env.MAIL_PASS,
   },
   default: {
-    from: 'Eventos UNIVEM <noreply@univem.edu.br>',
+    // from: 'Eventos UNIVEM <noreply@univem.edu.br>',
+    from: process.env.MAIL_FROM,
   },
 };
