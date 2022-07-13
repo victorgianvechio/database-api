@@ -35,9 +35,6 @@ routes.get('/', (req, res) => {
   return res.status(200).json({ message: 'Database API is running' });
 });
 
-// --------------------------------- VERTYS ----------------------------------//
-routes.post('/vertys/proposta', PropostaController.index);
-
 // ----------------------------- DRIVE-IN EVENTOS ----------------------------//
 routes.post('/drivein/qrcode', driveinValidation, DriveinController.index);
 
@@ -66,6 +63,9 @@ routes.get('/auth-token', (req, res) => {
     message: 'Database API is running and token is valid',
   });
 });
+
+// --------------------------------- VERTYS ----------------------------------//
+routes.post('/vertys/proposta', PropostaController.index);
 
 // ------------------------------ REPOSITORIO --------------------------------//
 routes.get('/repositorio', RepositorioController.index);
