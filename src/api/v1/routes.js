@@ -10,6 +10,8 @@ import validation, {
 
 import RepositorioController from './Repositorio/RepositorioController';
 
+import PropostaController from './Vertys/PropostaController';
+
 import AuthAlunoController from './Talentos/AuthAlunoController';
 import authAlunoValidation from './Talentos/authAlunoValidation';
 
@@ -32,6 +34,9 @@ const routes = new Router();
 routes.get('/', (req, res) => {
   return res.status(200).json({ message: 'Database API is running' });
 });
+
+// --------------------------------- VERTYS ----------------------------------//
+routes.post('/vertys/proposta', PropostaController.index);
 
 // ----------------------------- DRIVE-IN EVENTOS ----------------------------//
 routes.post('/drivein/qrcode', driveinValidation, DriveinController.index);
