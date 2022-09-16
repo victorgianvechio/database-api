@@ -63,7 +63,7 @@ routes.get('/rgm/video', VideoController.index);
 // ------------------ ROTAS QUE NECESSITAM DE AUTENTICAÇÃO ------------------ //
 // -------------------------------------------------------------------------- //
 
-// routes.use(authMiddleware);
+routes.use(authMiddleware);
 
 // ---------------------------- DEFAULT COM TOKEN ----------------------------//
 routes.get('/auth-token', (req, res) => {
