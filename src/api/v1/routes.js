@@ -1,6 +1,8 @@
 import { Router } from 'express';
+// import multer from 'multer';
 
 import authMiddleware from '../../middlewares/auth';
+// import multerConfig from '../../config/multer';
 
 import DatabaseController from './Database/DatabaseController';
 import validation, {
@@ -11,6 +13,8 @@ import validation, {
 import RepositorioController from './Repositorio/RepositorioController';
 
 import PropostaController from './Vertys/PropostaController';
+
+import VideoController from './RGM/VideoController';
 
 import AuthAlunoController from './Talentos/AuthAlunoController';
 import authAlunoValidation from './Talentos/authAlunoValidation';
@@ -23,6 +27,8 @@ import acompanhamentoValidation from './VestibularPresencial/Acompanhamento/acom
 
 import QRCodeController from './QRCode/QRCodeController';
 import qrcodeValidation from './QRCode/qrcodeValidation';
+
+// const upload = multer(multerConfig);
 
 const routes = new Router();
 
@@ -50,11 +56,14 @@ routes.get(
   AcompanhamentoController.find
 );
 
+// ----------------------------------- RGM -----------------------------------//
+routes.get('/rgm/video', VideoController.index);
+
 // -------------------------------------------------------------------------- //
 // ------------------ ROTAS QUE NECESSITAM DE AUTENTICAÇÃO ------------------ //
 // -------------------------------------------------------------------------- //
 
-routes.use(authMiddleware);
+// routes.use(authMiddleware);
 
 // ---------------------------- DEFAULT COM TOKEN ----------------------------//
 routes.get('/auth-token', (req, res) => {
@@ -66,6 +75,13 @@ routes.get('/auth-token', (req, res) => {
 
 // --------------------------------- VERTYS ----------------------------------//
 routes.post('/vertys/proposta', PropostaController.index);
+routes.post('/vertys/proposta2', PropostaController.index2);
+routes.post('/vertys/proposta3', PropostaController.index3);
+// routes.post(
+//   '/vertys/proposta',
+//   upload.single('file'),
+//   PropostaController.index
+// );
 
 // ------------------------------ REPOSITORIO --------------------------------//
 routes.get('/repositorio', RepositorioController.index);

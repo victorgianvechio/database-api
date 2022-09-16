@@ -37,6 +37,8 @@ class PropostaController {
   //     res.status(500).json(err);
   //   }
   // }
+
+  // SET CONTENT
   async index(req, res) {
     const { file, proposta, email } = req.body;
 
@@ -44,10 +46,174 @@ class PropostaController {
     const filePath = path.resolve(staticDir, 'vertys', 'proposta-comercial');
 
     try {
+      fs.writeFileSync(
+        path.resolve(
+          staticDir,
+          'vertys',
+          'proposta-comercial',
+          `${fileName}.html`
+        ),
+        file
+      );
       const browser = await puppeteer.launch({ headless: true });
       const page = await browser.newPage();
       // await page.setContent(finalTemplate);
-      await page.setContent(file);
+
+      await page.setContent(file, { waitUntil: 'networkidle0' });
+      // await page.goto(`data:text/html,${file}`, { waitUntil: 'networkidle0' });
+
+      // await page.waitForNavigation({
+      //   waitUntil: 'networkidle0',
+      // });
+
+      await page.waitForTimeout(8000);
+
+      await page.pdf({
+        // path: path.resolve(staticDir, 'matricula-contrato', 'contrato.pdf'),
+        path: path.resolve(filePath, `${fileName}.pdf`),
+        format: 'A4',
+        margin: {
+          top: '20px',
+          left: '20px',
+          right: '40px',
+          bottom: '20px',
+        },
+      });
+      await browser.close();
+
+      // ENVIA E-MAIL
+      await Mail.sendMail({
+        to: email,
+        // to: `Victor Gianvechio <victor.gianvecchio@live.com>`,
+        subject: `Vertys Group - Proposta ${proposta}`,
+        attachments: [
+          // {
+          //   filename: 'qrcode.png',
+          //   path: path.resolve(tempDir, `${fileName}.png`),
+          //   cid: 'qrcode',
+          // },
+          {
+            filename: `${fileName}.pdf`,
+            path: path.resolve(filePath, `${fileName}.pdf`),
+          },
+        ],
+        template: path.join('vertys', 'proposta-comercial'),
+        // context: {
+        //   name: participant.name,
+        //   board: event.board,
+        //   cpf: participant.cpf,
+        //   subject_mail: `Inscrição Evento - "${event.event_name}"`,
+        //   event_name: event.event_name,
+        //   id: participant.id,
+        // },
+      });
+      res.status(200).json({ message: 'Proposta enviada com sucesso' });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  // GO TO
+  async index2(req, res) {
+    const { file, proposta, email } = req.body;
+
+    const fileName = Date.now();
+    const filePath = path.resolve(staticDir, 'vertys', 'proposta-comercial');
+
+    try {
+      fs.writeFileSync(
+        path.resolve(
+          staticDir,
+          'vertys',
+          'proposta-comercial',
+          `${fileName}.html`
+        ),
+        file
+      );
+      const browser = await puppeteer.launch({ headless: true });
+      const page = await browser.newPage();
+      // await page.setContent(finalTemplate);
+
+      await page.setContent(file, { waitUntil: 'networkidle2' });
+      // await page.goto(`data:text/html,${file}`, { waitUntil: 'networkidle0' });
+
+      // await page.waitForFunction(10000);
+
+      await page.pdf({
+        // path: path.resolve(staticDir, 'matricula-contrato', 'contrato.pdf'),
+        path: path.resolve(filePath, `${fileName}.pdf`),
+        format: 'A4',
+        margin: {
+          top: '20px',
+          left: '20px',
+          right: '40px',
+          bottom: '20px',
+        },
+      });
+      await browser.close();
+
+      // ENVIA E-MAIL
+      await Mail.sendMail({
+        to: email,
+        // to: `Victor Gianvechio <victor.gianvecchio@live.com>`,
+        subject: `Vertys Group - Proposta ${proposta}`,
+        attachments: [
+          // {
+          //   filename: 'qrcode.png',
+          //   path: path.resolve(tempDir, `${fileName}.png`),
+          //   cid: 'qrcode',
+          // },
+          {
+            filename: `${fileName}.pdf`,
+            path: path.resolve(filePath, `${fileName}.pdf`),
+          },
+        ],
+        template: path.join('vertys', 'proposta-comercial'),
+        // context: {
+        //   name: participant.name,
+        //   board: event.board,
+        //   cpf: participant.cpf,
+        //   subject_mail: `Inscrição Evento - "${event.event_name}"`,
+        //   event_name: event.event_name,
+        //   id: participant.id,
+        // },
+      });
+      res.status(200).json({ message: 'Proposta enviada com sucesso' });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  // GO TO AND waitForNavigation
+  async index3(req, res) {
+    const { file, proposta, email } = req.body;
+
+    const fileName = Date.now();
+    const filePath = path.resolve(staticDir, 'vertys', 'proposta-comercial');
+
+    try {
+      fs.writeFileSync(
+        path.resolve(
+          staticDir,
+          'vertys',
+          'proposta-comercial',
+          `${fileName}.html`
+        ),
+        file
+      );
+      const browser = await puppeteer.launch({ headless: true });
+      const page = await browser.newPage();
+      // await page.setContent(finalTemplate);
+
+      await page.setContent(file, { waitUntil: 'domcontentloaded' });
+      // await page.goto(`data:text/html,${file}`, { waitUntil: 'networkidle2' });
+
+      // await page.waitForNavigation({
+      //   waitUntil: 'networkidle2',
+      // });
+
+      await page.waitForTimeout(8000);
+
       await page.pdf({
         // path: path.resolve(staticDir, 'matricula-contrato', 'contrato.pdf'),
         path: path.resolve(filePath, `${fileName}.pdf`),

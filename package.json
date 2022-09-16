@@ -29,9 +29,11 @@
     "test:db": "sucrase-node src/test/db.js",
     "test:qrcode": "sucrase-node src/test/qrcode.js",
     "test:hbs-pdf": "sucrase-node src/test/hbs-pdf.js",
+    "test:html-pdf": "sucrase-node src/test/html-pdf.js",
     "hbs-pdf": "sucrase-node src/app/HbsToPdf/ConversionService.js",
     "test:base64": "sucrase-node src/test/base64.js",
-    "test": "jest"
+    "test": "jest",
+    "test2": "sucrase-node src/test/teste.js"
   },
   "engineStrict": true,
   "engines": {
@@ -50,6 +52,7 @@
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.4.12",
     "nodemailer-express-handlebars": "^4.0.0",
     "oracledb": "^4.2.0",
